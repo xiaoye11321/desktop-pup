@@ -1,0 +1,41 @@
+{
+  "name": "desktop-pup",
+  "productName": "桌面萌宠",
+  "version": "0.1.0",
+  "description": "A small dog that wanders on your Windows desktop",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "generate:icon": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/generate-icon.ps1",
+    "build:win": "electron-builder --win portable --x64"
+  },
+  "devDependencies": {
+    "electron": "^35.1.5",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.desktop-pet.app",
+    "asar": true,
+    "electronDist": "node_modules/electron/dist",
+    "directories": {
+      "output": "out",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "build/icon.png",
+      "package.json"
+    ],
+    "win": {
+      "icon": "build/icon.png",
+      "signAndEditExecutable": false,
+      "target": [
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
+      "artifactName": "桌面萌宠-${version}-Portable.${ext}"
+    }
+  }
+}
